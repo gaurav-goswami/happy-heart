@@ -1,9 +1,7 @@
+import LandingPage from "@/components/landing";
+
 const Page = () => {
-  return (
-    <div>
-      This is homepage
-    </div>
-  )
+  return <LandingPage />;
 };
 
 export default Page;
