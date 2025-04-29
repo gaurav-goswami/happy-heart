@@ -5,6 +5,8 @@ import InputComponent from "../form/form-input";
 import { Button } from "../ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginResolver } from "@/lib/resolvers";
+import { loginUser } from "@/lib/api-caller";
+import { z } from "zod";
 
 const LoginForm = () => {
   const form = useForm({
@@ -16,6 +18,17 @@ const LoginForm = () => {
     resolver: zodResolver(loginResolver)
   });
 
+  const handleLogin = async (data: z.infer<typeof loginResolver>) => {
+    try{
+      const response = await loginUser(data);
+      if (response) {
+        console.log("Login successful", response);
+      }
+    }catch(error){
+      console.log("error", error);
+    }
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100 px-4">
       <div className="w-full max-w-md rounded-2xl border border-border bg-background/70 backdrop-blur-md p-8 shadow-2xl">
@@ -25,7 +38,7 @@ const LoginForm = () => {
         <FormProvider {...form}>
           <form
             className="space-y-4"
-            onSubmit={form.handleSubmit((data) => console.log(data))}
+            onSubmit={form.handleSubmit((data) => handleLogin(data))}
           >
             <div className="w-full">
               <InputComponent
