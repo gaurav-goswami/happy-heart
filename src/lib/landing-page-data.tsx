@@ -43,7 +43,7 @@ export const testimonials = [
   },
   {
     name: "Abhishek",
-    duration: "Using HealthHarmony for 3 months",
+    duration: "Using HappyHeart for 3 months",
     content:
       "The health tips are so personalized and helpful. I've incorporated many of them into my daily routine and feel more energetic than ever.",
     rating: 4,
