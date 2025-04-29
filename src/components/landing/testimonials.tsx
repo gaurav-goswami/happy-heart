@@ -1,4 +1,4 @@
-import { testimonials } from "@/lib/landing-page-data";
+import { testimonials } from "@/lib/data";
 import TestimonialCard from "./testimonial-card";
 
 const Testimonials = () => {
