@@ -16,22 +16,14 @@ export const POST = async (request: Request) => {
             return Response.json({ message: sanitizedData.error.message }, { status: 403 })
         };
 
-        cookieStore.set("auth", Buffer.from(sanitizedData.data.email + Date.now()).toString("base64"),
+        const { email } = sanitizedData.data;
+
+        cookieStore.set("auth", Buffer.from(email + Date.now()).toString("base64"),
             {
                 httpOnly: true, path: "/", maxAge: 60 * 60 * 24,
             });
 
-
-        return new Response(
-            JSON.stringify({ message: "Logged in successfully" }),
-            {
-                status: 200,
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
-        );
-
+        return Response.json({ message: "Logged in successfully", email });
     } catch (error) {
         console.log("error", error);
     }

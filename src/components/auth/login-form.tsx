@@ -7,6 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginResolver } from "@/lib/resolvers";
 import { loginUser } from "@/lib/api-caller";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
+import { useUserStore } from "@/lib/store";
 
 const LoginForm = () => {
   const form = useForm({
@@ -15,19 +17,23 @@ const LoginForm = () => {
       password: "",
     },
     mode: "onSubmit",
-    resolver: zodResolver(loginResolver)
+    resolver: zodResolver(loginResolver),
   });
 
+  const router = useRouter();
+  const { setUser } = useUserStore();
+
   const handleLogin = async (data: z.infer<typeof loginResolver>) => {
-    try{
+    try {
       const response = await loginUser(data);
       if (response) {
-        console.log("Login successful", response);
+        router.push("/dashboard");
+        setUser(response.email);
       }
-    }catch(error){
+    } catch (error) {
       console.log("error", error);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100 px-4">

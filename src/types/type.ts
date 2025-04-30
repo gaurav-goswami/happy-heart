@@ -18,3 +18,8 @@ export type THealthArticles = {
     description: string;
     category: TArticleCategory,
 }
+
+export type THealthTip = {
+    id: string;
+    tip: string;
+}

@@ -1,4 +1,8 @@
-import { THealthArticles, TMoodSelectorOptions } from "@/types/type";
+import {
+  THealthArticles,
+  THealthTip,
+  TMoodSelectorOptions,
+} from "@/types/type";
 import { BookOpen, Frown, Meh, Smile, Star } from "lucide-react";
 
 export const features = [
@@ -100,5 +104,28 @@ export const healthArticles: THealthArticles[] = [
     description:
       "Discover the benefits of daily mindfulness practice for reducing stress and anxiety.",
     category: "Mental Health",
+  },
+];
+
+export const healthTips: THealthTip[] = [
+  {
+    id: "100",
+    tip: "Drinking enough water helps maintain energy levels and improves cognitive function.",
+  },
+  {
+    id: "200",
+    tip: "Taking short breaks during work can boost productivity and reduce stress.",
+  },
+  {
+    id: "300",
+    tip: "Incorporating fruits and vegetables into your diet can improve overall health.",
+  },
+  {
+    id: "400",
+    tip: "Regular physical activity can enhance mood and reduce feelings of anxiety.",
+  },
+  {
+    id: "500",
+    tip: "Practicing gratitude can lead to improved mental health and well-being.",
   },
 ];

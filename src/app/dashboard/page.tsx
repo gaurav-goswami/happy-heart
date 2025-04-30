@@ -1,9 +1,10 @@
 import Articles from "@/components/dashboard/articles/articles";
-import HealthTips from "@/components/dashboard/health-tips";
 import MoodCard from "@/components/dashboard/mood/mood-card";
 import MoodSelector from "@/components/dashboard/mood/mood-selector";
 import Wrapper from "@/components/dashboard/wrapper";
 import { Button } from "@/components/ui/button";
+import { lazy, Suspense } from "react";
+const HealthTips = lazy(() => import("@/components/dashboard/health-tips"));
 
 const Dashboard = () => {
   return (
@@ -13,7 +14,15 @@ const Dashboard = () => {
           <MoodSelector />
         </div>
         <div className="w-full lg:max-w-sm">
-          <HealthTips />
+          <Suspense
+            fallback={
+              <div className="h-full w-full flex items-center justify-center">
+                Loading...
+              </div>
+            }
+          >
+            <HealthTips />
+          </Suspense>
         </div>
       </div>
 

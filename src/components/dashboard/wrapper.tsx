@@ -1,8 +1,5 @@
-import { getGreeting } from "@/lib/methods";
 import { ReactNode } from "react";
-
-// hardcoding the user's email for now
-const USER_EMAIL = "test@test.com";
+import Greeting from "./greeting";
 
 const Wrapper = ({ children }: { children: ReactNode }) => {
   return (
@@ -12,9 +9,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => {
           <span className="text-xl sm:text-2xl font-semibold tracking-tight text-gray-800">
             Healthy Dashboard
           </span>
-          <span className="text-sm text-gray-600">
-            {getGreeting()}, {USER_EMAIL}
-          </span>
+          <Greeting />
         </div>
         {children}
       </div>
