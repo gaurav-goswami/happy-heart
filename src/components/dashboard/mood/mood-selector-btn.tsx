@@ -1,32 +1,37 @@
 "use client";
 
 import { getMoodSelectorColors } from "@/lib/methods";
+import { useMoodStore } from "@/lib/store";
 import { TMoodSelectorOptions } from "@/types/type";
 import clsx from "clsx";
 import React from "react";
 
-type MoodSelectorProps = {
-  isSelected?: boolean;
-  onClick?: () => void;
-} & TMoodSelectorOptions;
+type MoodSelectorProps = TMoodSelectorOptions;
 
 const MoodSelectorButton = ({
   mood,
   icon,
   moodName,
   aboutMood,
-  isSelected = false,
-  onClick,
 }: MoodSelectorProps) => {
+  const moodToday = useMoodStore((state) => state.mood.moodToday);
+  const setMood = useMoodStore((state) => state.setMood);
+
+  const isSelected = moodToday === mood;
+
   const {
     bg,
     border,
     icon: iconColor,
   } = getMoodSelectorColors(mood, isSelected);
 
+  const handleClick = () => {
+    setMood(mood);
+  };
+
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       className={clsx(
         "w-full sm:w-48 h-40 rounded-xl p-4 text-center transition-all border",
         bg,
@@ -37,17 +42,10 @@ const MoodSelectorButton = ({
         <div
           className={clsx(
             "w-10 h-10 flex items-center justify-center",
-            isSelected ? "text-yellow-500" : "text-gray-400"
+            iconColor
           )}
         >
-          <div
-            className={clsx(
-              "w-10 h-10 flex items-center justify-center",
-              iconColor
-            )}
-          >
-            {icon}
-          </div>
+          {icon}
         </div>
         <span className="text-sm font-semibold text-gray-800">{moodName}</span>
         <p className="text-xs text-gray-600">{aboutMood}</p>
