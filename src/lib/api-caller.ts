@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import { z } from "zod";
 import { loginResolver } from "./resolvers";
+import { useUserStore } from "./store";
+import { toast } from "sonner";
 
 const LOGIN_ROUTE = "/api/auth/login";
-const HEALTH_TIPS_ROUTE =  `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/health-tips`;
-
+const LOGOUT_ROUTE = "/api/auth/logout";
+const HEALTH_TIPS_ROUTE = `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/health-tips`;
 const HEALTH_ARTICLES_ROUTE = `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/health-articles`;
 
 export const loginUser = async (data: z.infer<typeof loginResolver>) => {
@@ -20,11 +23,22 @@ export const loginUser = async (data: z.infer<typeof loginResolver>) => {
             }
         );
         return response.data;
-    } catch (error) {
-        console.error("Login error:", error);
-        throw error;
+    } catch (error: any) {
+        toast.error(error.response?.data?.message || "Login failed. Please try again.");
     }
 };
+
+export const logoutUser = async () => {
+    try {
+        const response = await axios.get(LOGOUT_ROUTE, {
+            withCredentials: true,
+        });
+        useUserStore.getState().clearUser();
+        return response.data;
+    } catch (error: any) {
+        toast.error(error.response?.data?.message || "Login failed. Please try again.");
+    }
+}
 
 export const getHealthTip = async (tidId: string) => {
     try {
@@ -34,7 +48,7 @@ export const getHealthTip = async (tidId: string) => {
         });
         return response.data;
     } catch (error) {
-        console.log("Error fetching health tips:", error);
+        throw error;
     }
 }
 
@@ -45,6 +59,6 @@ export const getHealthArticles = async () => {
         });
         return response.data;
     } catch (error) {
-        console.log("Error fetching health articles:", error);
+        throw error;
     }
 }

@@ -8,14 +8,15 @@ export const GET = async (request: Request) => {
         // This will return all the tips except the current tip user is viewing 
         const filteredTips = healthTips.filter(tip => tip.id !== tidId);
 
-        console.log("Filtered Tips:", filteredTips);
+        if (!filteredTips.length) {
+            return new Response("No health tip available")
+        }
 
         const newTip = filteredTips[Math.floor(Math.random() * filteredTips.length)];
 
         if (!newTip) {
             return new Response("No health tip available", { status: 404 });
         }
-
         return Response.json(newTip);
 
     } catch (error) {

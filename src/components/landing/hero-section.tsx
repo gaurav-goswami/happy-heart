@@ -1,6 +1,5 @@
 import { Button } from "../ui/button";
-
-const isLoggedIn = true;
+import LoginBtn from "./login-btn";
 
 const HeroSection = () => {
   return (
@@ -18,9 +17,7 @@ const HeroSection = () => {
           with the latest wellness content, and helps track your mood with ease.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center mt-4">
-          <Button className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 text-base font-medium">
-            {isLoggedIn ? "Go to Dashboard" : "Login"}
-          </Button>
+          <LoginBtn text="Go to dashboard" />
           <Button variant="outline" className="px-6 py-3 text-base font-medium">
             Track Mood
           </Button>

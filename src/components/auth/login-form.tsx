@@ -9,8 +9,12 @@ import { loginUser } from "@/lib/api-caller";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/lib/store";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 const LoginForm = () => {
+  const [loading, setLoading] = useState(false);
+
   const form = useForm({
     defaultValues: {
       email: "",
@@ -24,6 +28,7 @@ const LoginForm = () => {
   const { setUser } = useUserStore();
 
   const handleLogin = async (data: z.infer<typeof loginResolver>) => {
+    setLoading(true);
     try {
       const response = await loginUser(data);
       if (response) {
@@ -32,6 +37,8 @@ const LoginForm = () => {
       }
     } catch (error) {
       console.log("error", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -65,7 +72,11 @@ const LoginForm = () => {
             <Button
               type="submit"
               className="w-full bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700 transition duration-200 cursor-pointer"
+              disabled={loading}
             >
+              {
+                loading && <Loader2 className="size-4 animate-spin"/>
+              }
               Login
             </Button>
           </form>
