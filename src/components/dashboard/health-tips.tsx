@@ -8,12 +8,7 @@ const getCachedTip = unstable_cache(
 );
 
 const HealthTips = async () => {
-  const initialTip = await getCachedTip("0");
-  const tip = await getHealthTip("0");
-
-  if (!tip || !tip.id) {
-    return <div>No tip available.</div>;
-  }
+  const initialTip = await getCachedTip("0").catch(() => null);
 
   return <HealthTipsClient initialTip={initialTip} />;
 };

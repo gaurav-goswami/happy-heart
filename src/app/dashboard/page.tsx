@@ -1,11 +1,11 @@
 import Articles from "@/components/dashboard/articles/articles";
+import MoodCard from "@/components/dashboard/mood/mood-card";
 import MoodSelector from "@/components/dashboard/mood/mood-selector";
 import Wrapper from "@/components/dashboard/wrapper";
 import HealthTipsSkeleton from "@/components/skeletons/health-tips-skeleton";
 import { Button } from "@/components/ui/button";
 import { lazy, Suspense } from "react";
 const HealthTips = lazy(() => import("@/components/dashboard/health-tips"));
-const MoodCard = lazy(() => import("@/components/dashboard/mood/mood-card"));
 
 const Dashboard = () => {
   return (

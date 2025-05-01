@@ -1,12 +1,8 @@
-"use client";
-
 import { moodSelectorOptions } from "@/lib/data";
 import { CalendarHeart } from "lucide-react";
 import MoodSelectorButton from "./mood-selector-btn";
-import { useState } from "react";
 
 const MoodSelector = () => {
-  const [currentMood, setCurrentMood] = useState("");
 
   return (
     <div className="p-4 py-8 rounded-lg shadow-md flex flex-col gap-4 bg-white h-max w-full">
@@ -21,8 +17,6 @@ const MoodSelector = () => {
           <MoodSelectorButton
             key={index}
             {...option}
-            isSelected={currentMood === option.mood}
-            onClick={() => setCurrentMood(option.mood)}
           />
         ))}
       </div>

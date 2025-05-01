@@ -10,7 +10,7 @@ const getCachedHealthArticles = unstable_cache(
 );
 
 const Articles = async () => {
-  const healthArticles = await getCachedHealthArticles();
+  const healthArticles = await getCachedHealthArticles().catch(() => []);
 
   if (!healthArticles) {
     return (
