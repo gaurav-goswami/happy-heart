@@ -52,7 +52,7 @@ const Articles = async () => {
             >
               <div className="h-40 overflow-hidden">
                 <Image
-                  src="https://images.pexels.com/photos/1028741/pexels-photo-1028741.jpeg"
+                  src={article.image}
                   alt={article.title}
                   width={300}
                   height={200}

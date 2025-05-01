@@ -83,6 +83,7 @@ export const healthArticles: THealthArticles[] = [
     description:
       "Discover the benefits of daily mindfulness practice for reducing stress and anxiety.",
     category: "Mental Health",
+    image: "/mental-health-img.webp",
   },
   {
     id: 2,
@@ -90,6 +91,7 @@ export const healthArticles: THealthArticles[] = [
     description:
       "Learn why quality sleep is essential for your physical and mental wellbeing.",
     category: "Sleep",
+    image: "/sleep.webp",
   },
   {
     id: 3,
@@ -97,6 +99,7 @@ export const healthArticles: THealthArticles[] = [
     description:
       "Simple dietary changes that can help boost your energy throughout the day.",
     category: "Nutrition",
+    image: "/nutrition.webp",
   },
   {
     id: 4,
@@ -104,6 +107,7 @@ export const healthArticles: THealthArticles[] = [
     description:
       "Discover the benefits of daily mindfulness practice for reducing stress and anxiety.",
     category: "Mental Health",
+    image: "/mental-health-img.webp",
   },
 ];
 

@@ -17,6 +17,7 @@ export type THealthArticles = {
     title: string;
     description: string;
     category: TArticleCategory,
+    image: string;
 }
 
 export type THealthTip = {
