@@ -9,7 +9,7 @@ import { unstable_cache } from "next/cache";
 const LOGIN_ROUTE = "/api/auth/login";
 const LOGOUT_ROUTE = "/api/auth/logout";
 const HEALTH_TIPS_ROUTE = `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/health-tips`;
-const HEALTH_ARTICLES_ROUTE = `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/health-articles`;
+// const HEALTH_ARTICLES_ROUTE = `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/health-articles`;
 
 export const loginUser = async (data: z.infer<typeof loginResolver>) => {
     try {
@@ -53,14 +53,25 @@ export const getHealthTip = async (tidId: string) => {
     }
 }
 
-export const getCachedHealthArticles = unstable_cache(async () => {
+async function fetchNewsArticlesFromNewsAPI() {
     try {
-        const response = await axios.get(HEALTH_ARTICLES_ROUTE, {
-            withCredentials: true,
-        });
-        return response.data ?? [];
+        const apiKey = process.env.NEWS_API_KEY;
+        const query = "diseases";
+        const pageSize = 6;
+
+        const url = `https://newsapi.org/v2/everything?q=${query}&sortBy=publishedAt&pageSize=${pageSize}&apiKey=${apiKey}`;
+
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Failed to fetch");
+
+        const data = await response.json();
+        return data.articles ?? [];
     } catch (error) {
-        console.log("Error while getting cached health articles", error);
+        console.error("Error fetching from NewsAPI", error);
         return [];
     }
+}
+
+export const getCachedHealthArticles = unstable_cache(async () => {
+    return await fetchNewsArticlesFromNewsAPI();
 }, ["health-articles"]);

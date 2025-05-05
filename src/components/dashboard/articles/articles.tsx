@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { getCachedHealthArticles } from "@/lib/api-caller";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 
-const Articles = ({ articles }: { articles: any }) => {
-  const healthArticles = articles.healthArticles ?? [];
+const Articles = async () => {
+  const healthArticles = await getCachedHealthArticles() ?? [];
 
   if (!healthArticles || healthArticles.length === 0) {
     return (

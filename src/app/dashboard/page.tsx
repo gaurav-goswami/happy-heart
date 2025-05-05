@@ -4,12 +4,11 @@ import MoodSelector from "@/components/dashboard/mood/mood-selector";
 import Wrapper from "@/components/dashboard/wrapper";
 import HealthTipsSkeleton from "@/components/skeletons/health-tips-skeleton";
 import { Button } from "@/components/ui/button";
-import { getCachedHealthArticles } from "@/lib/api-caller";
 import { lazy, Suspense } from "react";
 const HealthTips = lazy(() => import("@/components/dashboard/health-tips"));
 
 const Dashboard = async () => {
-  const healthArticles = await getCachedHealthArticles() ?? [];
+  
   return (
     <Wrapper>
       <div className="flex flex-col lg:flex-row gap-4 w-full">
@@ -32,7 +31,7 @@ const Dashboard = async () => {
         </div>
         <MoodCard />
       </div>
-      <Articles articles={healthArticles}/>
+      <Articles />
     </Wrapper>
   );
 };
