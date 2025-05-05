@@ -7,8 +7,9 @@ const withPWA = withPWAInit({
 });
 
 const nextConfig: NextConfig = {
+  // keeping images unoptimized because the NewsAPI has different image sources
   images: {
-    domains: ["images.pexels.com"],
+    unoptimized: true,
   },
 };
 

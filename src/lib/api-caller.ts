@@ -4,6 +4,7 @@ import { z } from "zod";
 import { loginResolver } from "./resolvers";
 import { useUserStore } from "./store";
 import { toast } from "sonner";
+import { unstable_cache } from "next/cache";
 
 const LOGIN_ROUTE = "/api/auth/login";
 const LOGOUT_ROUTE = "/api/auth/logout";
@@ -52,13 +53,14 @@ export const getHealthTip = async (tidId: string) => {
     }
 }
 
-export const getHealthArticles = async () => {
+export const getCachedHealthArticles = unstable_cache(async () => {
     try {
         const response = await axios.get(HEALTH_ARTICLES_ROUTE, {
             withCredentials: true,
         });
-        return response.data;
+        return response.data ?? [];
     } catch (error) {
-        throw error;
+        console.log("Error while getting cached health articles", error);
+        return [];
     }
-}
+}, ["health-articles"]);
