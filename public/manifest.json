@@ -20,5 +20,7 @@
   "dir": "auto",
   "lang": "en-US",
   "name": "HappyHeart",
-  "short_name": "HH"
+  "short_name": "HH",
+  "start_url": "/",
+  "scope": "/"
 }
